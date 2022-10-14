@@ -2,7 +2,7 @@
 
 module i2c_read_tb ();
     parameter CLOCKPERIOD1 = 10;
-    parameter CLOCKPERIOD2 = 6;
+    parameter CLOCKPERIOD2 = 44;
     parameter CHIP_ADDR = 7'h0F;
 
     reg reset;
