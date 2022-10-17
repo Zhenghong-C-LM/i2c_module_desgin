@@ -1,6 +1,6 @@
 `timescale 1us / 1ns
 
-module i2c_block_read_tb ();
+module i2c_block_write_tb ();
     parameter CLOCKPERIOD1 = 10;
     parameter CLOCKPERIOD2 = 42;
     parameter CHIP_ADDR = 7'h0F;
@@ -11,6 +11,12 @@ module i2c_block_read_tb ();
 
     // For storing slave data
     reg [15:0]  slave_data[0:255];
+
+    // Check data
+    wire [15:0] slave_test1;
+    wire [15:0] slave_test2;
+    wire [15:0] slave_test3;
+    wire [15:0] slave_test4;
 
     wire SDA, SCL;
     wire [11:0] clk_div = 100;
@@ -125,6 +131,7 @@ module i2c_block_read_tb ();
     initial begin
         $timeformat(-9,1, "ns", 12);
 
+        // Initial Conditions
         reset <= 1'b0;
 
         slave_chip_addr  <= CHIP_ADDR;
@@ -134,12 +141,6 @@ module i2c_block_read_tb ();
         master_data_in   <= 16'h0000;
         master_write_en  <= 1'b0;
         master_read_en   <= 1'b0;
-
-        // set slave_data
-        slave_data[8'h00] <= 16'hA1A1;
-        slave_data[8'h0A] <= 16'hB2B2;
-        slave_data[8'h10] <= 16'hC3C3;
-        slave_data[8'h1A] <= 16'hD4D4;
 
         // multibyte
         write_mode       <= 1'b0;
@@ -153,33 +154,44 @@ module i2c_block_read_tb ();
         #20
         reset <= 1'b1;
 
-        #100 read_i2c(CHIP_ADDR, 8'h00);
-        #100 read_i2c(CHIP_ADDR, 8'h0A);
-        #100 read_i2c(CHIP_ADDR, 8'h10);
-        #100 read_i2c(CHIP_ADDR, 8'h1A);
-
+        // write_test
+        #100 write_i2c(CHIP_ADDR, 8'h00, 16'hA1A1);
+        #100 write_i2c(CHIP_ADDR, 8'h0A, 16'hB2B2);
+        #100 write_i2c(CHIP_ADDR, 8'h10, 16'hC3C3);
+        #100 write_i2c(CHIP_ADDR, 8'h1A, 16'hD4D4);
         #100 $finish;
     end
 
-    // Save slave data to register
+    // Check signal
+    assign slave_test1 = slave_data[8'h00];
+    assign slave_test2 = slave_data[8'h0A];
+    assign slave_test3 = slave_data[8'h10];
+    assign slave_test4 = slave_data[8'h1A];
+
+    // Store
     always @ (posedge clock2) begin
-        slave_data_in <= slave_data[slave_reg_addr];
+        if (slave_write_en) begin
+            slave_data[slave_reg_addr] <= slave_data_out;
+        end
     end
 
-    task read_i2c;
-        input [6:0] chip_addr;
-        input [7:0] reg_addr;
+    // write_function
+    task write_i2c;
+        input [6:0]  chip_addr;
+        input [7:0]  reg_addr;
+        input [15:0] data;
 
         begin
             @ (posedge clock1) begin
+                master_write_en  = 1'b1;
+
                 master_chip_addr = chip_addr;
                 master_reg_addr  = reg_addr;
-                master_read_en   = 1'b1;
+                master_data_in   = data;
             end
 
-            @ (posedge clock1) begin
-                master_read_en = 1'b0;
-            end
+            @ (posedge clock1)
+                master_write_en = 1'b0;
 
             @ (posedge clock1);
 
@@ -189,9 +201,8 @@ module i2c_block_read_tb ();
         end
     endtask
 
-    // Clock1 generation
+    // Clock generation
     always #(CLOCKPERIOD1 / 2) clock1 <= ~clock1;
-    // Clock2 generation
     always #(CLOCKPERIOD2 / 2) clock2 <= ~clock2;
 
 // Icarus Verilog
@@ -211,5 +222,5 @@ module i2c_block_read_tb ();
 
 // Xilinx ISIM
 `ifdef XILINX_ISIM
-`endif
+`endif    
 endmodule
