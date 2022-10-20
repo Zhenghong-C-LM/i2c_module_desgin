@@ -177,9 +177,9 @@ module i2c_block_read_tb ();
                 master_read_en   = 1'b1;
             end
 
-            @ (posedge clock1) begin
-                master_read_en = 1'b0;
-            end
+            //@ (posedge clock1) begin
+            //      master_read_en = 1'b0;
+            //end
 
             @ (posedge clock1);
 

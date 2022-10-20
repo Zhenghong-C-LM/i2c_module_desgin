@@ -9,7 +9,7 @@ z2
 cModel Technology
 dC:/intelFPGA/18.1
 vi2c
-Z0 !s110 1666047926
+Z0 !s110 1666060360
 !i10b 1
 !s100 ?=TD?=Y_59UKYA]=>9=B[0
 I9k=0fmZgBnF8B9g7HGOXR3
@@ -23,14 +23,14 @@ Z3 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z4 !s108 1666047926.000000
+Z4 !s108 1666060360.000000
 !s107 C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c.v|
 !i113 1
 Z5 o-work work
 Z6 tCvgOpt 0
 vi2c_block_read_tb
-R0
+!s110 1666047926
 !i10b 1
 !s100 fLITWck@@Hj8Ele7`@4Be1
 I0b;N[5@l[nb=Uk1H9=Mj91
@@ -44,9 +44,30 @@ R3
 r1
 !s85 0
 31
-R4
+!s108 1666047926.000000
 !s107 C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_read_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_read_tb.v|
+!i113 1
+R5
+R6
+vi2c_block_write_tb
+R0
+!i10b 1
+!s100 ]cU2>10b7X`6RT_?I@C:D0
+IN5Xg3>4iG54aOnAJCDR^Y0
+R1
+R2
+w1666060347
+8C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_write_tb.v
+FC:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_write_tb.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_write_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_write_tb.v|
 !i113 1
 R5
 R6
@@ -86,7 +107,7 @@ R3
 r1
 !s85 0
 31
-R4
+!s108 1666060359.000000
 !s107 C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_slave.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_slave.v|
 !i113 1

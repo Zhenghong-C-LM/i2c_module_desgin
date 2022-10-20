@@ -80,7 +80,7 @@ module i2c
             .clk_div    (clk_div),
 
             .open_drain (open_drain),
-
+	    .enable	(enable),
             .chip_addr  (chip_addr),
             .reg_addr   (reg_addr),
             .data_in    (data_in),
@@ -104,7 +104,7 @@ module i2c
         i2c_slave i2c_slave (
             .clk        (clk),
             .reset      (reset),
-
+	    .enable 	(~enable),
             .open_drain (open_drain),
 
             .chip_addr  (chip_id),

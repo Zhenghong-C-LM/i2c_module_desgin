@@ -1,4 +1,18 @@
-C:/Users/czh19/OneDrive/Desktop/i2c/i2c_slave.v {1 {vlog -work work -stats=none C:/Users/czh19/OneDrive/Desktop/i2c/i2c_slave.v
+C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_write_tb.v {1 {vlog -work work -stats=none C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_write_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module i2c_block_write_tb
+
+Top level modules:
+	i2c_block_write_tb
+
+} {} {}} C:/Users/czh19/OneDrive/Desktop/i2c/i2c_slave.v {1 {vlog -work work -stats=none C:/Users/czh19/OneDrive/Desktop/i2c/i2c_slave.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module i2c_slave
+
+Top level modules:
+	i2c_slave
+
+} {} {}} C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_slave.v {1 {vlog -work work -stats=none C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_slave.v
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module i2c_slave
 
@@ -12,20 +26,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	i2c_master
 
-} {} {}} C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_slave.v {1 {vlog -work work -stats=none C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_slave.v
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module i2c_slave
-
-Top level modules:
-	i2c_slave
-
-} {} {}} C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_read_tb.v {1 {vlog -work work -stats=none C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_read_tb.v
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module i2c_block_read_tb
-
-Top level modules:
-	i2c_block_read_tb
-
 } {} {}} C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_master.v {1 {vlog -work work -stats=none C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_master.v
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module i2c_master
@@ -33,18 +33,18 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	i2c_master
 
-} {} {}} C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c.v {1 {vlog -work work -stats=none C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c.v
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module i2c
-
-Top level modules:
-	i2c
-
 } {} {}} C:/Users/czh19/OneDrive/Desktop/i2c/i2c_wr_tb.v {1 {vlog -work work -stats=none C:/Users/czh19/OneDrive/Desktop/i2c/i2c_wr_tb.v
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module i2c_write_tb
 
 Top level modules:
 	i2c_write_tb
+
+} {} {}} C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c.v {1 {vlog -work work -stats=none C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module i2c
+
+Top level modules:
+	i2c
 
 } {} {}}

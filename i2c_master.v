@@ -16,7 +16,7 @@ module i2c_master
         input  clk,            // System clock
         input  reset,          // Reset signal
         input  [11:0] clk_div, // Clock divider value to configure SCL from the system clock
-
+	    input  enable,
         input open_drain, // Open drain
 
         input  sda_in,    // SDA Input
@@ -80,7 +80,7 @@ module i2c_master
     assign byte_count = sr_count[5:3];
 
     always @ (posedge clk) begin
-        if (~reset) begin
+        if (~reset | ~enable) begin
             state     <= s_idle;
 
             sda_reg   <= 1'b1;

@@ -190,8 +190,8 @@ module i2c_block_write_tb ();
                 master_data_in   = data;
             end
 
-            @ (posedge clock1)
-                master_write_en = 1'b0;
+            //@ (posedge clock1)
+            //    master_write_en = 1'b0;
 
             @ (posedge clock1);
 

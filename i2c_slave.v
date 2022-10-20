@@ -15,7 +15,7 @@ module i2c_slave
     )(
         input clk,        // System Clock
         input reset,      // Reset signal
-
+	input enable,
         input open_drain, // For open drain
 
         input  sda_in,    // SDA Input
@@ -97,7 +97,7 @@ module i2c_slave
 
 
     always @(posedge clk) begin
-        if (~reset) begin
+        if (~reset | ~enable) begin
             state       <= s_idle;
             sda_reg     <= 1'b1;
             oen_reg     <= 1'b1;
@@ -114,6 +114,7 @@ module i2c_slave
             nack        <= 1'b0;
             done        <= 1'b0;
             busy        <= 1'b0;
+            chip_addr_reg <= 7'h00;
         end
         else begin
             scl_s         <= scl_in;
