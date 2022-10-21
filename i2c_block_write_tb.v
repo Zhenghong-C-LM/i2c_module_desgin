@@ -13,10 +13,10 @@ module i2c_block_write_tb ();
     reg [31:0]  slave_data[0:255];
 
     // Check data
-    wire [31:0] slave_test1;
-    wire [31:0] slave_test2;
-    wire [31:0] slave_test3;
-    wire [31:0] slave_test4;
+    wire [15:0] slave_test1;
+    wire [15:0] slave_test2;
+    wire [15:0] slave_test3;
+    wire [15:0] slave_test4;
 
     wire SDA, SCL;
     wire [11:0] clk_div = 100;
@@ -30,8 +30,8 @@ module i2c_block_write_tb ();
 
     reg         master_write_en;
     reg         master_read_en;
-    reg  [31:0] master_data_in;
-    wire [31:0] master_data_out;
+    reg  [15:0] master_data_in;
+    wire [15:0] master_data_out;
 
     wire        master_sda_out;
     wire        master_sda_oen;
@@ -45,8 +45,10 @@ module i2c_block_write_tb ();
     wire        slave_done;
 
     wire        slave_write_en;
-    reg  [31:0] slave_data_in;
-    wire [31:0] slave_data_out;
+    reg  [15:0] slave_data_in0;
+    reg  [15:0] slave_data_in1;
+    wire [15:0] slave_data_out0;
+    wire [15:0] slave_data_out1;
 
     wire        slave_sda_in;
     wire        slave_scl_in;
@@ -69,7 +71,7 @@ module i2c_block_write_tb ();
     // i2c Master
     i2c #(
         .ADDR_BYTES(1),
-        .DATA_BYTES(4)
+        .DATA_BYTES(2)
     ) i2c_1 (
         .enable     (1'b1),
 
@@ -85,8 +87,8 @@ module i2c_block_write_tb ();
         .read_en    (master_read_en),
         .status     (master_status),
         
-        .data_in    (master_data_in),
-        .data_out   (master_data_out),
+        .data_in0    (master_data_in),
+        .data_out0   (master_data_out),
         .done       (master_done),
         .busy       (master_busy),
 
@@ -101,7 +103,7 @@ module i2c_block_write_tb ();
     // i2c Slave
     i2c #(
         .ADDR_BYTES(1),
-        .DATA_BYTES(4)
+        .DATA_BYTES(2)
     ) i2c_2 (
         .enable     (1'b0),
 
@@ -114,8 +116,10 @@ module i2c_block_write_tb ();
         .slave_reg_addr   (slave_reg_addr),
         .slave_write_en   (slave_write_en),
 
-        .data_in    (slave_data_in),
-        .data_out   (slave_data_out),
+        .data_in0    (slave_data_in0),
+        .data_out0   (slave_data_out0),
+        .data_in1    (slave_data_in1),
+        .data_out1   (slave_data_out1),
         .done       (slave_done),
         .busy       (slave_busy),
 
@@ -156,9 +160,9 @@ module i2c_block_write_tb ();
 
         // write_test
         #100 write_i2c(CHIP_ADDR, 8'h00, 16'hA1A1);
-        #100 write_i2c(CHIP_ADDR, 8'h0A, 16'hB2B2);
-        #100 write_i2c(CHIP_ADDR, 8'h10, 16'hC3C3);
-        #100 write_i2c(CHIP_ADDR, 8'h1A, 16'hD4D4);
+        #100 write_i2c(CHIP_ADDR, 8'h01, 16'hB2B2);
+        #100 write_i2c(CHIP_ADDR, 8'h00, 16'hC3C3);
+        #100 write_i2c(CHIP_ADDR, 8'h01, 16'hD4D4);
         #100 $finish;
     end
 
@@ -171,7 +175,7 @@ module i2c_block_write_tb ();
     // Store
     always @ (posedge clock2) begin
         if (slave_write_en) begin
-            slave_data[slave_reg_addr] <= slave_data_out;
+            slave_data[slave_reg_addr] <= slave_data_out0;
         end
     end
 

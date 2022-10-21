@@ -39,8 +39,10 @@ module i2c_block_read_tb ();
     wire        slave_done;
 
     wire        slave_write_en;
-    reg  [15:0] slave_data_in;
-    wire [15:0] slave_data_out;
+    reg  [15:0] slave_data_in0;
+    reg  [15:0] slave_data_in1;
+    wire [15:0] slave_data_out0;
+    wire [15:0] slave_data_out1;
 
     wire        slave_sda_in;
     wire        slave_scl_in;
@@ -79,8 +81,8 @@ module i2c_block_read_tb ();
         .read_en    (master_read_en),
         .status     (master_status),
         
-        .data_in    (master_data_in),
-        .data_out   (master_data_out),
+        .data_in0    (master_data_in),
+        .data_out0   (master_data_out),
         .done       (master_done),
         .busy       (master_busy),
 
@@ -108,8 +110,10 @@ module i2c_block_read_tb ();
         .slave_reg_addr   (slave_reg_addr),
         .slave_write_en   (slave_write_en),
 
-        .data_in    (slave_data_in),
-        .data_out   (slave_data_out),
+        .data_in0   (slave_data_in0),
+        .data_in1   (slave_data_in1),
+        .data_out0  (slave_data_out0),
+        .data_out1  (slave_data_out1),
         .done       (slave_done),
         .busy       (slave_busy),
 
@@ -137,9 +141,7 @@ module i2c_block_read_tb ();
 
         // set slave_data
         slave_data[8'h00] <= 16'hA1A1;
-        slave_data[8'h0A] <= 16'hB2B2;
-        slave_data[8'h10] <= 16'hC3C3;
-        slave_data[8'h1A] <= 16'hD4D4;
+        slave_data[8'h01] <= 16'hB2B2;
 
         // multibyte
         write_mode       <= 1'b0;
@@ -154,16 +156,16 @@ module i2c_block_read_tb ();
         reset <= 1'b1;
 
         #100 read_i2c(CHIP_ADDR, 8'h00);
-        #100 read_i2c(CHIP_ADDR, 8'h0A);
-        #100 read_i2c(CHIP_ADDR, 8'h10);
-        #100 read_i2c(CHIP_ADDR, 8'h1A);
-
+        #100 read_i2c(CHIP_ADDR, 8'h01);
+        #100 read_i2c(CHIP_ADDR, 8'h00);
+        #100 read_i2c(CHIP_ADDR, 8'h01);
         #100 $finish;
     end
 
     // Save slave data to register
     always @ (posedge clock2) begin
-        slave_data_in <= slave_data[slave_reg_addr];
+        slave_data_in0 <= slave_data[8'h00];
+        slave_data_in1 <= slave_data[8'h01];
     end
 
     task read_i2c;
@@ -177,9 +179,9 @@ module i2c_block_read_tb ();
                 master_read_en   = 1'b1;
             end
 
-            //@ (posedge clock1) begin
-            //      master_read_en = 1'b0;
-            //end
+            @ (posedge clock1) begin
+                  master_read_en = 1'b0;
+            end
 
             @ (posedge clock1);
 

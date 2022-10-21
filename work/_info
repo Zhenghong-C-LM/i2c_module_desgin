@@ -9,86 +9,107 @@ z2
 cModel Technology
 dC:/intelFPGA/18.1
 vi2c
-Z0 !s110 1666301269
+Z0 !s110 1666393832
 !i10b 1
-!s100 ^Emkc889B[_>hU`4HV9Tf1
-Ia2c^b<NTB>PbN>N>e6X901
+!s100 :l9Po:E4flDIBLGm=?J`g3
+IP_Fl0D`oW`nIRlR?fGfOS3
 Z1 VDg1SIo80bB@j0V0VzS_@n1
-Z2 dC:/Users/czh19/OneDrive/Desktop/simple_iic_desgin
-w1666300747
-8C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c.v
-FC:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c.v
+Z2 dC:/Users/czh19/OneDrive/Desktop/i2c_module_desgin
+w1666393600
+8C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c.v
+FC:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c.v
 L0 9
 Z3 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z4 !s108 1666301269.000000
-!s107 C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c.v|
+Z4 !s108 1666393832.000000
+!s107 C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c.v|
 !i113 1
 Z5 o-work work
 Z6 tCvgOpt 0
-vi2c_block_write_tb
+vi2c_block_read_tb
 R0
 !i10b 1
-!s100 0@c^e7D7NJAVHC_V]BQG63
-I6j4H1K03kH9o8I<M[a3A?3
+!s100 f?AT>TUi73:SgRAX_0VD60
+IICdNmI^<KIGAhogVo^oWQ0
 R1
 R2
-w1666301264
-8C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_write_tb.v
-FC:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_write_tb.v
+w1666393825
+8C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_read_tb.v
+FC:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_read_tb.v
 L0 3
 R3
 r1
 !s85 0
 31
 R4
-!s107 C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_write_tb.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_block_write_tb.v|
+!s107 C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_read_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_read_tb.v|
+!i113 1
+R5
+R6
+vi2c_block_write_tb
+!s110 1666392611
+!i10b 1
+!s100 ]?J[GFn3echXJ__]4Ag6h1
+IU`fiMcUEj<34`9K_TTPMI0
+R1
+R2
+w1666392186
+8C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_write_tb.v
+FC:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_write_tb.v
+L0 3
+R3
+r1
+!s85 0
+31
+!s108 1666392611.000000
+!s107 C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_write_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_write_tb.v|
 !i113 1
 R5
 R6
 vi2c_master
 R0
 !i10b 1
-!s100 ]fH65]D]jMl<Oc^^YPU0c1
-I8PGFRfo:m8LQD@:^B?8101
+!s100 8>izfeMGGm27j^:]LfohY3
+I8Z7U1GVUOCX07[G7jdKzh1
 R1
 R2
-w1666300560
-8C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_master.v
-FC:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_master.v
+Z7 w1666389386
+8C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_master.v
+FC:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_master.v
 L0 9
 R3
 r1
 !s85 0
 31
 R4
-!s107 C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_master.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_master.v|
+!s107 C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_master.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_master.v|
 !i113 1
 R5
 R6
 vi2c_slave
 R0
 !i10b 1
-!s100 U7OGJlz;fYMKF:n:3KUDI1
-IEB4jHLnc>A@:ddYnK;^Kc0
+!s100 dJMN[Io1OXGH1V272<lSi3
+InGnF5=^B`6GWMHP]31DoZ3
 R1
 R2
-w1666300565
-8C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_slave.v
-FC:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_slave.v
+R7
+8C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_slave.v
+FC:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_slave.v
 L0 9
 R3
 r1
 !s85 0
 31
 R4
-!s107 C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_slave.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/simple_iic_desgin/i2c_slave.v|
+!s107 C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_slave.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_slave.v|
 !i113 1
 R5
 R6

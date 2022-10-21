@@ -9,7 +9,7 @@ Description:
 module i2c
     #(
         parameter ADDR_BYTES = 1,
-        parameter DATA_BYTES = 4,
+        parameter DATA_BYTES = 2,
         parameter ST_WIDTH = 1 + ADDR_BYTES + DATA_BYTES,
         parameter REG_ADDR_WIDTH = 8 * ADDR_BYTES
     )(
@@ -36,8 +36,10 @@ module i2c
         output slave_write_en,                         // Write enable
 
         //Data path
-        input [8 * DATA_BYTES - 1:0] data_in,         // Data read from register
-        output [8 * DATA_BYTES - 1:0] data_out,   // Data to write to register
+        input [8 * DATA_BYTES - 1:0] data_in1,         // Data read from register
+        input [8 * DATA_BYTES - 1:0] data_in0,         // Data read from register
+        output reg [8 * DATA_BYTES - 1:0] data_out1,       // Data to write to register
+        output reg [8 * DATA_BYTES - 1:0] data_out0,       // Daat to write to register
         output done,
         output busy,
 
@@ -48,11 +50,7 @@ module i2c
 
         input  scl_in,    // SCL Input
         output scl_out,   // SCL Output
-        output scl_oen,   // SCL Output Enable
-
-	// registers
-	 output reg [8 * DATA_BYTES - 1:0] master_rd_xacn_reg, // data comes from slave during read transaction
-	 output reg [8 * DATA_BYTES - 1:0] slave_wr_xacn_reg  // data comes from master during write transaction 
+        output scl_oen    // SCL Output Enable
         );
 
 
@@ -78,6 +76,9 @@ module i2c
         wire master_busy;
         wire slave_busy;
 
+        wire [8 * DATA_BYTES - 1:0] data_in;
+        wire [8 * DATA_BYTES - 1:0] data_out;
+
         // i2c Master
         i2c_master i2c_master (
             .clk        (clk),
@@ -85,7 +86,7 @@ module i2c
             .clk_div    (clk_div),
 
             .open_drain (open_drain),
-	    .enable	(enable),
+	        .enable	(enable),
             .chip_addr  (chip_addr),
             .reg_addr   (reg_addr),
             .data_in    (data_in),
@@ -109,7 +110,7 @@ module i2c
         i2c_slave i2c_slave (
             .clk        (clk),
             .reset      (reset),
-	    .enable 	(~enable),
+	        .enable 	(~enable),
             .open_drain (open_drain),
 
             .chip_addr  (chip_id),
@@ -136,19 +137,14 @@ module i2c
         assign done = enable ? master_done : slave_done;
         assign busy = enable ? master_busy : slave_busy;
 
-// 32bit read  and write  registers for read and write operation
-// decoded using one bit of addr and writ_en and read_en signals
 
-        always @ (posedge clk) begin
-		if (reset) begin
-		  master_rd_xacn_reg <= 32'h0000;
-		  slave_wr_xacn_reg <= 32'h0000;	
-		end else begin
-		  master_rd_xacn_reg <= master_data_out;
- 		  slave_wr_xacn_reg <= slave_data_out;
-		end
-	end
-         
-
+        assign data_in = (enable || (slave_reg_addr == 8'h00)) ? data_in0 : data_in1;
+        always @ (posedge slave_write_en || master_done) begin
+            if ((slave_reg_addr == 8'h00) || enable) begin
+                data_out0 <= data_out;
+            end else if (slave_reg_addr == 8'h01) begin
+                data_out1 <= data_out;
+            end
+        end 
 
 endmodule
