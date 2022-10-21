@@ -10,13 +10,13 @@ module i2c_block_write_tb ();
     reg clock2;
 
     // For storing slave data
-    reg [15:0]  slave_data[0:255];
+    reg [31:0]  slave_data[0:255];
 
     // Check data
-    wire [15:0] slave_test1;
-    wire [15:0] slave_test2;
-    wire [15:0] slave_test3;
-    wire [15:0] slave_test4;
+    wire [31:0] slave_test1;
+    wire [31:0] slave_test2;
+    wire [31:0] slave_test3;
+    wire [31:0] slave_test4;
 
     wire SDA, SCL;
     wire [11:0] clk_div = 100;
@@ -30,8 +30,8 @@ module i2c_block_write_tb ();
 
     reg         master_write_en;
     reg         master_read_en;
-    reg  [15:0] master_data_in;
-    wire [15:0] master_data_out;
+    reg  [31:0] master_data_in;
+    wire [31:0] master_data_out;
 
     wire        master_sda_out;
     wire        master_sda_oen;
@@ -45,8 +45,8 @@ module i2c_block_write_tb ();
     wire        slave_done;
 
     wire        slave_write_en;
-    reg  [15:0] slave_data_in;
-    wire [15:0] slave_data_out;
+    reg  [31:0] slave_data_in;
+    wire [31:0] slave_data_out;
 
     wire        slave_sda_in;
     wire        slave_scl_in;
@@ -69,7 +69,7 @@ module i2c_block_write_tb ();
     // i2c Master
     i2c #(
         .ADDR_BYTES(1),
-        .DATA_BYTES(2)
+        .DATA_BYTES(4)
     ) i2c_1 (
         .enable     (1'b1),
 
@@ -101,7 +101,7 @@ module i2c_block_write_tb ();
     // i2c Slave
     i2c #(
         .ADDR_BYTES(1),
-        .DATA_BYTES(2)
+        .DATA_BYTES(4)
     ) i2c_2 (
         .enable     (1'b0),
 
@@ -190,8 +190,8 @@ module i2c_block_write_tb ();
                 master_data_in   = data;
             end
 
-            //@ (posedge clock1)
-            //    master_write_en = 1'b0;
+            @ (posedge clock1)
+                master_write_en = 1'b0;
 
             @ (posedge clock1);
 

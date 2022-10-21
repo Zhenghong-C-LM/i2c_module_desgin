@@ -69,7 +69,7 @@ module i2c_write_tb ();
     // i2c Master
     i2c_master #(
         .ADDR_BYTES(1),
-        .DATA_BYTES(2)
+        .DATA_BYTES(4)
     ) i2c_master (
         .clk        (clock1),
         .reset      (reset),
@@ -99,7 +99,7 @@ module i2c_write_tb ();
     // i2c Slave
     i2c_slave #(
         .ADDR_BYTES(1),
-        .DATA_BYTES(2)
+        .DATA_BYTES(4)
     ) i2c_slave (
         .clk        (clock2),
         .reset      (reset),

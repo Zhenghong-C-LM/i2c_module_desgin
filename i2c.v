@@ -9,7 +9,7 @@ Description:
 module i2c
     #(
         parameter ADDR_BYTES = 1,
-        parameter DATA_BYTES = 2,
+        parameter DATA_BYTES = 4,
         parameter ST_WIDTH = 1 + ADDR_BYTES + DATA_BYTES,
         parameter REG_ADDR_WIDTH = 8 * ADDR_BYTES
     )(
@@ -50,28 +50,33 @@ module i2c
         output scl_out,   // SCL Output
         output scl_oen,   // SCL Output Enable
 
-        //wire
-        wire master_sda_out,
-        wire slave_sda_out,
-
-        wire master_sda_oen,
-        wire slave_sda_oen,
-
-        wire master_scl_out,
-        wire slave_scl_out,
-
-        wire master_scl_oen,
-        wire slave_scl_oen,
-        
-        wire [8 * DATA_BYTES - 1:0] master_data_out,
-        wire [8 * DATA_BYTES - 1:0] slave_data_out,
-
-        wire master_done,
-        wire slave_done,
-
-        wire master_busy,
-        wire slave_busy
+	// registers
+	 output reg [8 * DATA_BYTES - 1:0] master_rd_xacn_reg, // data comes from slave during read transaction
+	 output reg [8 * DATA_BYTES - 1:0] slave_wr_xacn_reg  // data comes from master during write transaction 
         );
+
+
+        //wire
+        wire master_sda_out;
+        wire slave_sda_out;
+
+        wire master_sda_oen;
+        wire slave_sda_oen;
+
+        wire master_scl_out;
+        wire slave_scl_out;
+
+        wire master_scl_oen;
+        wire slave_scl_oen;
+        
+        wire [8 * DATA_BYTES - 1:0] master_data_out;
+        wire [8 * DATA_BYTES - 1:0] slave_data_out;
+
+        wire master_done;
+        wire slave_done;
+
+        wire master_busy;
+        wire slave_busy;
 
         // i2c Master
         i2c_master i2c_master (
@@ -130,4 +135,20 @@ module i2c
         assign data_out = enable ? master_data_out : slave_data_out;
         assign done = enable ? master_done : slave_done;
         assign busy = enable ? master_busy : slave_busy;
+
+// 32bit read  and write  registers for read and write operation
+// decoded using one bit of addr and writ_en and read_en signals
+
+        always @ (posedge clk) begin
+		if (reset) begin
+		  master_rd_xacn_reg <= 32'h0000;
+		  slave_wr_xacn_reg <= 32'h0000;	
+		end else begin
+		  master_rd_xacn_reg <= master_data_out;
+ 		  slave_wr_xacn_reg <= slave_data_out;
+		end
+	end
+         
+
+
 endmodule
