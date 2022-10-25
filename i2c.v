@@ -6,6 +6,8 @@ Author  Zhenghong Chen (qus9bh@virginia.edu)
 Description:
   i2c (Master and Slave)
 */
+`include "i2c_slave.v"
+`include "i2c_master.v"
 module i2c
     #(
         parameter ADDR_BYTES = 1,
@@ -53,6 +55,11 @@ module i2c
         output scl_oen    // SCL Output Enable
         );
 
+	//reg
+	reg i2c_count;
+	reg i2c_count2;
+	reg write_en_pulse;
+	reg read_en_pulse;
 
         //wire
         wire master_sda_out;
@@ -79,6 +86,38 @@ module i2c
         wire [8 * DATA_BYTES - 1:0] data_in;
         wire [8 * DATA_BYTES - 1:0] data_out;
 
+	always @ (posedge clk) begin
+		if (write_en == 1) begin
+			if (i2c_count == 0) begin
+				write_en_pulse <= 1; 
+				i2c_count <= 1;
+			end
+			else begin
+				write_en_pulse <= 0; 
+			end 
+		end	
+		else begin
+			i2c_count <= 0;
+			write_en_pulse <= 0; 
+		end
+    	end
+
+	always @ (posedge clk) begin
+		if (read_en == 1) begin
+			if (i2c_count2 == 0) begin
+				read_en_pulse <= 1; 
+				i2c_count2 <= 1;
+			end
+			else begin
+				read_en_pulse <= 0; 
+			end 
+		end	
+		else begin
+			i2c_count2 <= 0;
+			read_en_pulse <= 0; 
+		end
+    	end
+
         // i2c Master
         i2c_master i2c_master (
             .clk        (clk),
@@ -90,9 +129,9 @@ module i2c
             .chip_addr  (chip_addr),
             .reg_addr   (reg_addr),
             .data_in    (data_in),
-            .write_en   (write_en),
+            .write_en   (write_en_pulse),
             .write_mode (write_mode),
-            .read_en    (read_en),
+            .read_en    (read_en_pulse),
             .status     (status),
             .done       (master_done),
             .busy       (master_busy),
