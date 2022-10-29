@@ -179,16 +179,19 @@ module i2c_block_read_tb ();
                 master_read_en   = 1'b1;
             end
 
-            //@ (posedge clock1) begin
-            //      master_read_en = 1'b0;
-            //end
+            @ (posedge clock1) begin
+                  master_read_en = 1'b0;
+            end
 
             @ (posedge clock1);
-
+            //Add one cycle because there is one more register in the startup phase.
+            @ (posedge clock1);
+            
             while (master_busy) begin
                 @ (posedge clock1);
             end
         end
+        // #200000
     endtask
 
     // Clock1 generation

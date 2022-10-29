@@ -194,11 +194,14 @@ module i2c_block_write_tb ();
                 master_data_in   = data;
             end
 
-            //@ (posedge clock1)
-                //master_write_en = 1'b0;
+            @ (posedge clock1) begin
+                master_write_en = 1'b0;
+            end
 
             @ (posedge clock1);
-
+            //Add one cycle because there is one more register in the startup phase.
+            @ (posedge clock1);
+            
             while (master_busy) begin
                 @ (posedge clock1);
             end
