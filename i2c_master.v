@@ -16,8 +16,9 @@ module i2c_master
         input  clk,            // System clock
         input  reset,          // Reset signal
         input  [11:0] clk_div, // Clock divider value to configure SCL from the system clock
-	input  enable,
+	    input  enable,
         input open_drain, // Open drain
+        input  data_size,
 
         input  sda_in,    // SDA Input
         output sda_out,   // SDA Output
@@ -127,8 +128,11 @@ module i2c_master
 
                 if (in_prog) begin
                     scl_count <= 2'b00;
-
-                    sr <= {data_in, {SR_WIDTH - 8 * DATA_BYTES{1'b0}}};
+                    if (data_size) begin
+                        sr <= {data_in, {SR_WIDTH - 8 * DATA_BYTES{1'b0}}};
+                    end else begin
+                        sr <= {data_in[7:0], {SR_WIDTH - 8 {1'b0}}};
+                    end
                 end
                 else begin
                     scl_count <= 2'b10;
@@ -137,7 +141,11 @@ module i2c_master
                         sr <= {chip_addr, 1'b0, data_in};
                     end
                     else begin
-                        sr <= {chip_addr, 1'b0, reg_addr, data_in};
+                        if (data_size) begin
+                            sr <= {chip_addr, 1'b0, reg_addr, data_in};
+                        end else begin
+                            sr <= {chip_addr, 1'b0, reg_addr, data_in[7:0], {8'b0}};
+                        end
                     end
                 end
 
@@ -210,7 +218,7 @@ module i2c_master
 
                         s_shift_in: begin
                             if (scl_count == 2'b00) begin
-                                if (sr_count == 8 * (DATA_BYTES + 1)) begin
+                                if (sr_count == 8 * (data_size + 2)) begin
                                     state   <= s_send_nack;
                                     sda_reg <= open_drain ? 1'b0 : 1'b1;
                                     oen_reg <= 1'b1;
@@ -254,7 +262,7 @@ module i2c_master
 
                         s_rcv_ack: begin
                             if (scl_count == 2'b00) begin
-                                if (writing && ((byte_count == DATA_BYTES + ADDR_BYTES + 1 && ~in_prog) || (byte_count == DATA_BYTES && in_prog))) begin
+                                if (writing && ((byte_count == data_size + ADDR_BYTES + 2 && ~in_prog) || (byte_count == data_size + 1 && in_prog))) begin
                                     if (write_mode) begin
                                         state   <= s_idle;
                                         in_prog <= 1'b1;
@@ -270,15 +278,15 @@ module i2c_master
                                 end
                                 else if (~writing && reading) begin
                                     state <= s_shift_in;
-                                    //if (sr_count == 6'b00_1000) begin
-                                        //state <= s_shift_out;
-                                        //sda_reg  <= open_drain ? 1'b0 : sr[SR_WIDTH - 1];
-                                        //oen_reg  <= open_drain ? sr[SR_WIDTH - 1] : 1'b0;
-                                        //sr       <= {sr[SR_WIDTH - 2:0], 1'b1};
-                                        //sr_count <= sr_count + 1'b1;
-                                    //end else begin
-                                        //state <= s_shift_in;
-                                    //end
+                                    // if (sr_count == 6'b00_1000) begin
+                                    //     state <= s_shift_out;
+                                    //     sda_reg  <= open_drain ? 1'b0 : sr[SR_WIDTH - 1];
+                                    //     oen_reg  <= open_drain ? sr[SR_WIDTH - 1] : 1'b0;
+                                    //     sr       <= {sr[SR_WIDTH - 2:0], 1'b1};
+                                    //     sr_count <= sr_count + 1'b1;
+                                    // end else begin
+                                    //     state <= s_shift_in;
+                                    // end
                                 end
                                 else begin
                                     state    <= s_shift_out;

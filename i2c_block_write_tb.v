@@ -79,6 +79,7 @@ module i2c_block_write_tb ();
         .reset      (reset),
         .clk_div    (clk_div),
         .open_drain (1'b1),
+        .data_size  (1'b0),
 
         .chip_addr  (master_chip_addr),
         .reg_addr   (master_reg_addr),
@@ -111,6 +112,7 @@ module i2c_block_write_tb ();
         .reset      (reset),
 
         .open_drain (1'b1),
+        .data_size  (1'b0),
 
         .chip_id          (slave_chip_addr),
         .slave_reg_addr   (slave_reg_addr),
@@ -206,6 +208,8 @@ module i2c_block_write_tb ();
                 @ (posedge clock1);
             end
         end
+
+        // #160000
     endtask
 
     // Clock generation

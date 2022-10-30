@@ -9,107 +9,107 @@ z2
 cModel Technology
 dC:/intelFPGA/18.1
 vi2c
-Z0 !s110 1667012308
+Z0 !s110 1667098452
 !i10b 1
-!s100 Peo7`9TLMT1ch]Sb<hGb21
-I_h9L6zhD7^BOl@:b9c>9b1
+!s100 fazo=P7bT7ILmTU592LlQ2
+I;5>9UgkFE8HOGOHo0PM5d0
 Z1 VDg1SIo80bB@j0V0VzS_@n1
 Z2 dC:/Users/czh19/OneDrive/Desktop/i2c_module_desgin
-w1667012238
-8C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c.v
-FC:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c.v
+w1667087210
+8C:/Users/czh19/OneDrive/Desktop/i2c/i2c.v
+FC:/Users/czh19/OneDrive/Desktop/i2c/i2c.v
 L0 11
 Z3 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z4 !s108 1667012308.000000
-Z5 !s107 i2c_master.v|i2c_slave.v|C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c.v|
-Z6 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c.v|
+Z4 !s108 1667098452.000000
+!s107 i2c_master.v|i2c_slave.v|C:/Users/czh19/OneDrive/Desktop/i2c/i2c.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c/i2c.v|
 !i113 1
-Z7 o-work work
-Z8 tCvgOpt 0
+Z5 o-work work
+Z6 tCvgOpt 0
 vi2c_block_read_tb
-!s110 1667012246
-!i10b 1
-!s100 R]>BMTm`>Jkf:=T0GY[h[1
-I<FJ>>cfS3Nae6Se0;DdCN2
-R1
-R2
-w1667011981
-8C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_read_tb.v
-FC:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_read_tb.v
-L0 3
-R3
-r1
-!s85 0
-31
-!s108 1667012246.000000
-!s107 C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_read_tb.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_read_tb.v|
-!i113 1
-R7
-R8
-vi2c_block_write_tb
 R0
 !i10b 1
-!s100 76N9Vh8QdEe:_65akQWPz3
-I7NEee6`MUgoIOMj8hWCM<3
+!s100 ``e`T8No7K>g]Go<kzlC_2
+Idn1UF[^ba;2ke82O3eRck0
 R1
 R2
-w1667012003
-8C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_write_tb.v
-FC:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_write_tb.v
+w1667098448
+8C:/Users/czh19/OneDrive/Desktop/i2c/i2c_block_read_tb.v
+FC:/Users/czh19/OneDrive/Desktop/i2c/i2c_block_read_tb.v
 L0 3
 R3
 r1
 !s85 0
 31
 R4
-!s107 C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_write_tb.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_block_write_tb.v|
+!s107 C:/Users/czh19/OneDrive/Desktop/i2c/i2c_block_read_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c/i2c_block_read_tb.v|
 !i113 1
-R7
-R8
+R5
+R6
+vi2c_block_write_tb
+!s110 1667098347
+!i10b 1
+!s100 VXKYQ=iGdZ5;5f2=Y1Jdb1
+IgeIjGMefNbzk2zKcRK]Nc0
+R1
+R2
+w1667098341
+8C:/Users/czh19/OneDrive/Desktop/i2c/i2c_block_write_tb.v
+FC:/Users/czh19/OneDrive/Desktop/i2c/i2c_block_write_tb.v
+L0 3
+R3
+r1
+!s85 0
+31
+!s108 1667098346.000000
+!s107 C:/Users/czh19/OneDrive/Desktop/i2c/i2c_block_write_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c/i2c_block_write_tb.v|
+!i113 1
+R5
+R6
 vi2c_master
 R0
 !i10b 1
-!s100 8>izfeMGGm27j^:]LfohY3
-I8Z7U1GVUOCX07[G7jdKzh1
+!s100 AN22n>CfR>5:E7`TDaTlb1
+I`<9M4ID^Fd3hklEMV8M8]2
 R1
 R2
-Z9 w1666732023
-8C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_master.v
-FC:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_master.v
+w1667097478
+8C:/Users/czh19/OneDrive/Desktop/i2c/i2c_master.v
+FC:/Users/czh19/OneDrive/Desktop/i2c/i2c_master.v
 L0 9
 R3
 r1
 !s85 0
 31
 R4
-!s107 C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_master.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c_module_desgin/i2c_master.v|
+!s107 C:/Users/czh19/OneDrive/Desktop/i2c/i2c_master.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c/i2c_master.v|
 !i113 1
-R7
-R8
+R5
+R6
 vi2c_slave
 R0
 !i10b 1
-!s100 dJMN[Io1OXGH1V272<lSi3
-ILbO>[NSnShbhYab_^NEzC2
+!s100 XWoL24YI]gS9@GTL_dU9]2
+IGdnk1^EgBMYfM`9caa2K00
 R1
 R2
-R9
-8i2c_slave.v
-Fi2c_slave.v
+w1667098315
+8C:/Users/czh19/OneDrive/Desktop/i2c/i2c_slave.v
+FC:/Users/czh19/OneDrive/Desktop/i2c/i2c_slave.v
 L0 9
 R3
 r1
 !s85 0
 31
 R4
+!s107 C:/Users/czh19/OneDrive/Desktop/i2c/i2c_slave.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/czh19/OneDrive/Desktop/i2c/i2c_slave.v|
+!i113 1
 R5
 R6
-!i113 1
-R7
-R8

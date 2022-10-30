@@ -13,11 +13,11 @@ module i2c_slave
         parameter REG_ADDR_WIDTH = 8 * ADDR_BYTES,
         parameter REG_DATA_WIDTH = 8 * DATA_BYTES
     )(
-        input clk,        // System Clock
-        input reset,      // Reset signal
-	input enable,
-        input open_drain, // For open drain
-
+        input  clk,        // System Clock
+        input  reset,      // Reset signal
+	    input  enable,
+        input  open_drain, // For open drain
+        input  data_size,
         input  sda_in,    // SDA Input
         output sda_out,   // SDA Output
         output sda_oen,   // SDA Output Enable
@@ -177,7 +177,11 @@ module i2c_slave
                                         else begin
                                             state   <= s_ack;
                                             rw_bit  <= word[0];
-                                            sr_send <= data_in;
+                                            if (data_size) begin
+                                                sr_send <= data_in;
+                                            end else begin
+                                                sr_send <= {data_in[7:0], 8'b0};
+                                            end
                                         end
                                     end
                                     else begin
@@ -188,10 +192,10 @@ module i2c_slave
                                 else begin
                                     data_out <= (data_out << 8) | word_exp;
 
-                                    if (reg_bytes == DATA_BYTES - 1'b1) begin
+                                    if (reg_bytes == data_size) begin
                                         state      <= s_write;
                                         write_en   <= 1'b1;
-                                        reg_bytes  <= reg_bytes + 1'b1 - DATA_BYTES;
+                                        reg_bytes  <= reg_bytes - data_size;
                                     end
                                     else begin
                                         state      <= s_ack;
@@ -221,7 +225,7 @@ module i2c_slave
                                 oen_reg   <= 1'b1;
                                 reg_bytes <= reg_bytes + 1'b1;
 
-                                if (reg_bytes == DATA_BYTES - 1'b1) begin
+                                if (reg_bytes == data_size) begin
                                     reg_addr  <= reg_addr + 1'b1;
                                     reg_bytes <= 1'b0;
                                 end
@@ -243,7 +247,11 @@ module i2c_slave
                             oen_reg <= 1'b0;
 
                             if (rw_bit && (reg_bytes == 0)) begin
-                                sr_send <= data_in;
+                                if (data_size) begin
+                                    sr_send <= data_in;
+                                end else begin
+                                    sr_send <= {data_in[7:0], 8'b0};
+                                end
                             end
                         end
                     end
